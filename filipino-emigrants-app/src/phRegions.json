@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "REGION_NAME": "Region I - Ilocos Region",
+        "REGION_CODENAME": "regioni"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[120.3, 16.0], [120.7, 16.0], [120.7, 17.0], [120.3, 17.0], [120.3, 16.0]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "REGION_NAME": "Region II - Cagayan Valley",
+        "REGION_CODENAME": "regionii"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[121.2, 16.5], [121.9, 16.5], [121.9, 17.8], [121.2, 17.8], [121.2, 16.5]]]
+      }
+    }
+  ]
+}
