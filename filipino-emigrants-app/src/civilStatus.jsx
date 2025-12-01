@@ -378,6 +378,7 @@ const fetchData = async () => {
         {/* === GRAPHS === */}
 
 {/* Filters for Grouped Bar Chart */}
+<h2 style={{ marginTop: "50px" }}>Bar Graph (Civil Status per Year)</h2>
 <div style={{ marginBottom: "10px", display: "flex", alignItems: "center", gap: "20px" }}>
   {/* Year Selector */}
   <div>

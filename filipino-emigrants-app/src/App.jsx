@@ -170,25 +170,42 @@ function App() {
   const placeOfOriginTotalEmigrants = Object.values(placeOfOriginTotals).reduce((sum, val) => sum + val, 0);
 
   // === Totals for major countries ===
-  const majorCountryTotals = majorCountryData.reduce(
-    (acc, cur) => {
-      acc["USA"] += cur["USA"] || 0;
-      acc["CANADA"] += cur["CANADA"] || 0;
-      acc["JAPAN"] += cur["JAPAN"] || 0;
-      acc["AUSTRALIA"] += cur["AUSTRALIA"] || 0;
-      acc["ITALY"] += cur["ITALY"] || 0;
-      acc["NEW ZEALAND"] += cur["NEW ZEALAND"] || 0;
-      acc["UNITED KINGDOM"] += cur["UNITED KINGDOM"] || 0;
-      acc["GERMANY"] += cur["GERMANY"] || 0;
-      acc["SOUTH KOREA"] += cur["SOUTH KOREA"] || 0;
-      acc["SPAIN"] += cur["SPAIN"] || 0;
-      acc["OTHERS"] += cur["OTHERS"] || 0;
-      return acc;
-    },
-    {
-      "USA": 0,"CANADA": 0,"JAPAN": 0,"AUSTRALIA": 0,"ITALY": 0,"NEW ZEALAND": 0,"UNITED KINGDOM": 0,"GERMANY": 0,"SOUTH KOREA": 0,"SPAIN": 0,"OTHERS": 0
-    }
-  );
+const majorCountryTotals = majorCountryData.reduce(
+  (acc, cur) => {
+    // Safe value extraction with validation
+    const getSafeValue = (record, keys) => {
+      for (const key of keys) {
+        const value = record[key];
+        if (value !== undefined && value !== null) {
+          const numValue = Number(value);
+          // Validate it's a reasonable number (less than 1 million)
+          if (!isNaN(numValue) && numValue < 1000000) {
+            return numValue;
+          }
+        }
+      }
+      return 0;
+    };
+
+    acc["USA"] += getSafeValue(cur, ["USA", "U S A", "usa"]);
+    acc["CANADA"] += getSafeValue(cur, ["CANADA", "C A N A D A", "canada"]);
+    acc["JAPAN"] += getSafeValue(cur, ["JAPAN", "J A P A N", "japan"]);
+    acc["AUSTRALIA"] += getSafeValue(cur, ["AUSTRALIA", "A U S T R A L I A", "australia"]);
+    acc["ITALY"] += getSafeValue(cur, ["ITALY", "I T A L Y", "italy"]);
+    acc["NEW ZEALAND"] += getSafeValue(cur, ["NEW ZEALAND", "N E W Z E A L A N D", "newZealand"]);
+    acc["UNITED KINGDOM"] += getSafeValue(cur, ["UNITED KINGDOM", "U N I T E D K I N G D O M", "unitedKingdom"]);
+    acc["GERMANY"] += getSafeValue(cur, ["GERMANY", "G E R M A N Y", "germany"]);
+    acc["SOUTH KOREA"] += getSafeValue(cur, ["SOUTH KOREA", "S O U T H K O R E A", "southKorea", "SOUTH_KOREA"]);
+    acc["SPAIN"] += getSafeValue(cur, ["SPAIN", "S P A I N", "spain"]);
+    acc["OTHERS"] += getSafeValue(cur, ["OTHERS", "O T H E R S", "others"]);
+    
+    return acc;
+  },
+  {
+    "USA": 0,"CANADA": 0,"JAPAN": 0,"AUSTRALIA": 0,"ITALY": 0,"NEW ZEALAND": 0,
+    "UNITED KINGDOM": 0,"GERMANY": 0,"SOUTH KOREA": 0,"SPAIN": 0,"OTHERS": 0
+  }
+);
 
   const majorCountryTotalEmigrants = Object.values(majorCountryTotals).reduce((sum, val) => sum + val, 0);
 
