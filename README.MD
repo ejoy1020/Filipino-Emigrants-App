@@ -13,3 +13,6 @@ git clone https://github.com/ejoy1020/Filipino-Emigrants-App.git
 # Navigate into the folder
 cd filipino-emigrants-app
 
+# Run the app
+npm run dev
+
